@@ -1,0 +1,380 @@
+// Глобальная переменная для элемента
+var targetElement = null;
+
+// ==UserScript==
+// @name         Скрытие таблиц на странице
+// @namespace    http://tampermonkey.net/
+// @version      0.1
+// @description  Добавляет чекбоксы для скрытия и отображения таблиц на странице
+// @author       Syvorotkin Denys
+// @match        https://ldz-prof-rpt.na.pg.com:88/Thingworx/Runtime/index.html?mashup=NEW_DowntimeSingle_PG_Master_V3&forceClose=true&__enableBMF=true&
+// @grant        GM_addStyle
+// ==/UserScript==
+
+(function() {
+    'use strict';
+
+    // Функция для скрытия или отображения элемента по его id
+    function toggleElementVisibility(elementId, hide) {
+        var elementToToggle = document.getElementById(elementId);
+        if (elementToToggle) {
+            elementToToggle.style.display = hide ? 'none' : 'table-row';
+        }
+    }
+
+     // Функция для замены текста в текстовых узлах
+    function replaceTextInTextNodes(node, language) {
+          if (node.nodeType === Node.TEXT_NODE) {
+            if (language === 'Russian') {
+                node.textContent = node.textContent.replace(/Opcja czasu/g, 'Выбор смены:');
+                node.textContent = node.textContent.replace(/Up/g, 'Работает');
+                node.textContent = node.textContent.replace(/Unplanned/g, 'Неплан. остановка');
+                node.textContent = node.textContent.replace(/PR Out/g, 'Остановлена');
+                node.textContent = node.textContent.replace(/Planned/g, 'План. остановка');
+                // Машины
+                node.textContent = node.textContent.replace(/GVCCA219 S1 HdlE Sys 219 DH19/g, 'DH 19');
+                node.textContent = node.textContent.replace(/GVCCB220 S1 HdlE Sys 220 DH20/g, 'DH 20');
+                node.textContent = node.textContent.replace(/GVCCC221 S1 HdlE Sys 221 DH21/g, 'DH 21');
+                node.textContent = node.textContent.replace(/GVCCD222 S1 HdlE Sys 222 DH22/g, 'DH 22');
+                node.textContent = node.textContent.replace(/GVCCE223 S1 HdlE Sys 223 DH23/g, 'DH 23');
+                node.textContent = node.textContent.replace(/GVCCH226 S1 HdlE Sys 226 DH26/g, 'DH 26');
+                node.textContent = node.textContent.replace(/GVCCL230 S1 HdlE Sys 230 DH30/g, 'DH 30');
+                node.textContent = node.textContent.replace(/GVCCM231 S1 HdlE Sys 231 DH31/g, 'DH 31');
+                node.textContent = node.textContent.replace(/GVCVC206 S1 MHdl Sys 206 DH06/g, 'DH 06');
+                node.textContent = node.textContent.replace(/GVCVF233 S1 MHdl Sys 218 DH33/g, 'DH 33');
+                node.textContent = node.textContent.replace(/GVCVG234 S1 MHdl Sys 234 DH34/g, 'DH 34');
+                node.textContent = node.textContent.replace(/GVETB211 Fus\/PG MO Sys 211 DH11/g, 'DH 11');
+                node.textContent = node.textContent.replace(/GVETC214 Fus\/PG MO Sys 214 DH14/g, 'DH 14');
+                node.textContent = node.textContent.replace(/GVFAA216 Agil Hdl Sys 216 DH16/g, 'DH 16');
+                node.textContent = node.textContent.replace(/GVFAB217 Agil Hdl Sys 217 DH17/g, 'DH 17');
+                node.textContent = node.textContent.replace(/GVFAC218 Agil Hdl Sys 218 DH18/g, 'DH 18');
+                node.textContent = node.textContent.replace(/GVFAD209 Agil Hdl Sys 209 DH09/g, 'DH 09');
+                node.textContent = node.textContent.replace(/GVMAA210 OffB Hdl Sys 210 DH10/g, 'DH 10');
+                node.textContent = node.textContent.replace(/GVMAB213 OffB Hdl Sys 213 DH13/g, 'DH 13');
+                node.textContent = node.textContent.replace(/GVMAC215 OffB Hdl Sys 215 DH15/g, 'DH 15');
+                node.textContent = node.textContent.replace(/GVCCN232 S1 HdlE Sys 232 DH32/g, 'DH 32');
+                node.textContent = node.textContent.replace(/GVDCA235 S2 HdlE Sys 235 DH35/g, 'DH 35');
+                node.textContent = node.textContent.replace(/GVFAE236 Agil Hdl Sys 236 DH36/g, 'DH 36');
+                node.textContent = node.textContent.replace(/GVFAF237 Agil Hdl Sys 237 DH37/g, 'DH 37');
+                node.textContent = node.textContent.replace(/GVPAA238 Perm Hdl Sys 238/g, 'DH 38');
+                node.textContent = node.textContent.replace(/GVCCP239 S1 HdlE Sys 239 DH39/g, 'DH 39');
+                node.textContent = node.textContent.replace(/Switch/g, 'Сменить');
+                node.textContent = node.textContent.replace(/% PR/g, '% ПП');
+                node.textContent = node.textContent.replace(/Scrap/g, 'Лом');
+                node.textContent = node.textContent.replace(/#Unpl Stops\/Day/g, 'Неплан. Ост\/День');
+
+
+            } else if (language === 'Standart') {
+                node.textContent = node.textContent.replace(/Выбор смены:/g, 'Opcja czasu');
+                node.textContent = node.textContent.replace(/Работает/g, 'Up');
+                node.textContent = node.textContent.replace(/Неплан. остановка/g, 'Unplanned');
+                node.textContent = node.textContent.replace(/Остановлена/g, 'PR Out');
+                node.textContent = node.textContent.replace(/План. остановка/g, 'Planned');
+                // Машины
+                node.textContent = node.textContent.replace(/GVCCA219 S1 HdlE Sys 219 DH19/g, 'DH 19');
+                node.textContent = node.textContent.replace(/GVCCB220 S1 HdlE Sys 220 DH20/g, 'DH 20');
+                node.textContent = node.textContent.replace(/GVCCC221 S1 HdlE Sys 221 DH21/g, 'DH 21');
+                node.textContent = node.textContent.replace(/GVCCD222 S1 HdlE Sys 222 DH22/g, 'DH 22');
+                node.textContent = node.textContent.replace(/GVCCE223 S1 HdlE Sys 223 DH23/g, 'DH 23');
+                node.textContent = node.textContent.replace(/GVCCH226 S1 HdlE Sys 226 DH26/g, 'DH 26');
+                node.textContent = node.textContent.replace(/GVCCL230 S1 HdlE Sys 230 DH30/g, 'DH 30');
+                node.textContent = node.textContent.replace(/GVCCM231 S1 HdlE Sys 231 DH31/g, 'DH 31');
+                node.textContent = node.textContent.replace(/GVCVC206 S1 MHdl Sys 206 DH06/g, 'DH 06');
+                node.textContent = node.textContent.replace(/GVCVF233 S1 MHdl Sys 218 DH33/g, 'DH 33');
+                node.textContent = node.textContent.replace(/GVCVG234 S1 MHdl Sys 234 DH34/g, 'DH 34');
+                node.textContent = node.textContent.replace(/GVETB211 Fus\/PG MO Sys 211 DH11/g, 'DH 11');
+                node.textContent = node.textContent.replace(/GVETC214 Fus\/PG MO Sys 214 DH14/g, 'DH 14');
+                node.textContent = node.textContent.replace(/GVFAA216 Agil Hdl Sys 216 DH16/g, 'DH 16');
+                node.textContent = node.textContent.replace(/GVFAB217 Agil Hdl Sys 217 DH17/g, 'DH 17');
+                node.textContent = node.textContent.replace(/GVFAC218 Agil Hdl Sys 218 DH18/g, 'DH 18');
+                node.textContent = node.textContent.replace(/GVFAD209 Agil Hdl Sys 209 DH09/g, 'DH 09');
+                node.textContent = node.textContent.replace(/GVMAA210 OffB Hdl Sys 210 DH10/g, 'DH 10');
+                node.textContent = node.textContent.replace(/GVMAB213 OffB Hdl Sys 213 DH13/g, 'DH 13');
+                node.textContent = node.textContent.replace(/GVMAC215 OffB Hdl Sys 215 DH15/g, 'DH 15');
+                node.textContent = node.textContent.replace(/GVCCN232 S1 HdlE Sys 232 DH32/g, 'DH 32');
+                node.textContent = node.textContent.replace(/GVDCA235 S2 HdlE Sys 235 DH35/g, 'DH 35');
+                node.textContent = node.textContent.replace(/GVFAE236 Agil Hdl Sys 236 DH36/g, 'DH 36');
+                node.textContent = node.textContent.replace(/GVFAF237 Agil Hdl Sys 237 DH37/g, 'DH 37');
+                node.textContent = node.textContent.replace(/GVPAA238 Perm Hdl Sys 238/g, 'DH 38');
+                node.textContent = node.textContent.replace(/GVCCP239 S1 HdlE Sys 239 DH39/g, 'DH 39');
+                node.textContent = node.textContent.replace(/Сменить/g, 'Switch');
+                node.textContent = node.textContent.replace(/% ПП/g, '% PR');
+                node.textContent = node.textContent.replace(/Лом/g, 'Scrap');
+                node.textContent = node.textContent.replace(/Неплан. Ост\/День/g, '#Unpl Stops\/Day');
+            }
+        } else if (node.childNodes && node.childNodes.length > 0) {
+            node.childNodes.forEach(function(childNode) {
+                replaceTextInTextNodes(childNode, language);
+
+            });
+        }
+    }
+
+
+
+   // Функция для выполнения замены текста после выбора языка
+function replaceTextAfterLanguageChange(language) {
+    replaceTextInTextNodes(document.body, language);
+
+}
+
+// Создаем выпадающее меню
+var languageSelector = document.createElement('select');
+languageSelector.innerHTML = '<option value="Standart">Standart</option><option value="Russian">Russian</option>';
+languageSelector.style.zIndex = '99999';
+languageSelector.style.position = 'fixed';
+
+// Добавляем обработчик события изменения выбора языка
+languageSelector.addEventListener('change', function(event) {
+    var selectedLanguage = event.target.value;
+    replaceTextAfterLanguageChange(selectedLanguage);
+});
+
+// Добавляем выпадающее меню на страницу
+var languageSelectorContainer = document.createElement('div');
+languageSelectorContainer.appendChild(languageSelector);
+document.body.appendChild(languageSelectorContainer);
+
+// Функция для повторной установки выбранного языка
+function restoreSelectedLanguage() {
+    var selectedLanguage = languageSelector.value;
+    replaceTextAfterLanguageChange(selectedLanguage);
+}
+
+// Наблюдатель за изменениями DOM
+var observer = new MutationObserver(function(mutationsList) {
+    // При каждом изменении DOM вызываем функцию для восстановления выбранного языка
+    restoreSelectedLanguage();
+});
+
+
+// Настроим наблюдатель для отслеживания изменений внутри body
+observer.observe(document.body, { childList: true, subtree: true });
+
+    // КОнец тестовой зоны
+
+
+
+  // Функция для создания и добавления кастомного чекбокса
+function addHideCheckbox(checkboxLabel, elementId) {
+    var checkboxContainer = document.createElement('label');
+    checkboxContainer.style.fontSize = '14px';
+    checkboxContainer.style.fontWeight = 'normal';
+    checkboxContainer.style.marginRight = '10px';
+
+    // Создаем скрытый стандартный чекбокс
+    var checkbox = document.createElement('input');
+    checkbox.type = 'checkbox';
+    checkbox.style.display = 'none';
+    checkbox.checked = true; // Установим значение checked в true
+    checkbox.addEventListener('change', function () {
+        toggleElementVisibility(elementId, !this.checked); // Изменим логику скрытия
+    });
+
+    // Создаем стили для кастомного чекбокса
+    var customCheckbox = document.createElement('div');
+    customCheckbox.style.display = 'inline-block';
+    customCheckbox.style.width = '14px'; // Размер кастомного чекбокса
+    customCheckbox.style.height = '14px'; // Размер кастомного чекбокса
+    customCheckbox.style.border = '1px solid #5CFF88'; // Зеленая рамка
+    customCheckbox.style.backgroundColor = '#8DFFAC'; // Зеленый фон
+    customCheckbox.style.borderRadius = '35px'; // Скругление углов
+
+    // Обработчик события для синхронизации состояния кастомного чекбокса с стандартным
+    checkbox.addEventListener('change', function () {
+        if (this.checked) {
+            customCheckbox.style.backgroundColor = '#8DFFAC';
+            customCheckbox.style.border = '1px solid #5CFF88'; // Зеленая рамка
+        } else {
+            customCheckbox.style.backgroundColor = '#FFABAB';
+            customCheckbox.style.border = '1px solid #FF6E6E'; // красная рамка
+        }
+    });
+
+    checkboxContainer.appendChild(checkbox);
+    checkboxContainer.appendChild(customCheckbox);
+    checkboxContainer.appendChild(document.createTextNode(checkboxLabel));
+
+    return checkboxContainer;
+}
+
+    // Функция для обработки клика на кнопку "Включить/отключить все"
+    function toggleAllCheckboxes(checkboxes, toggle) {
+        for (var i = 0; i < checkboxes.length; i++) {
+            checkboxes[i].checked = toggle;
+            var elementId = checkboxes[i].getAttribute('data-element-id');
+            toggleElementVisibility(elementId, !toggle);
+            checkboxes[i].dispatchEvent(new Event('change')); // Имитируем событие 'change' для обработки скрытия/отображения элементов
+        }
+    }
+
+ var element = document.getElementById('root_mashupcontainer-25_container-93'); // Укажите id вашего элемента
+    if (element) {
+        element.style.borderRadius = '20px'; // Установите желаемый радиус
+    }
+
+   // Создаем контейнер для чекбоксов
+var newLine = document.createElement('br');
+var checkboxContainer = document.createElement('div');
+checkboxContainer.style.position = 'fixed';
+checkboxContainer.style.top = '11%';
+checkboxContainer.style.left = '16%';
+checkboxContainer.style.right = '26.5%';
+checkboxContainer.style.zIndex = '1510';
+checkboxContainer.style.background = '#fff';
+checkboxContainer.style.padding = '10px';
+checkboxContainer.style.border = '1px solid #D2FFFE';
+checkboxContainer.style.borderRadius = '10px';
+
+// Добавляем чекбоксы для каждой пары данных и помещаем их в контейнер
+
+checkboxContainer.appendChild(addHideCheckbox("DH 06", "root_mashupcontainer-25_repeater-236-row-9"));
+checkboxContainer.appendChild(addHideCheckbox("DH 09", "root_mashupcontainer-25_repeater-236-row-17"));
+checkboxContainer.appendChild(addHideCheckbox("DH 10", "root_mashupcontainer-25_repeater-236-row-18"));
+checkboxContainer.appendChild(addHideCheckbox("DH 11", "root_mashupcontainer-25_repeater-236-row-12"));
+checkboxContainer.appendChild(addHideCheckbox("DH 13", "root_mashupcontainer-25_repeater-236-row-19"));
+checkboxContainer.appendChild(addHideCheckbox("DH 14", "root_mashupcontainer-25_repeater-236-row-13"));
+checkboxContainer.appendChild(addHideCheckbox("DH 15", "root_mashupcontainer-25_repeater-236-row-20"));
+checkboxContainer.appendChild(addHideCheckbox("DH 16", "root_mashupcontainer-25_repeater-236-row-14"));
+checkboxContainer.appendChild(addHideCheckbox("DH 17", "root_mashupcontainer-25_repeater-236-row-15"));
+checkboxContainer.appendChild(addHideCheckbox("DH 18", "root_mashupcontainer-25_repeater-236-row-16"));
+checkboxContainer.appendChild(addHideCheckbox("DH 19", "root_mashupcontainer-25_repeater-236-row-1"));
+checkboxContainer.appendChild(addHideCheckbox("DH 20", "root_mashupcontainer-25_repeater-236-row-2"));
+checkboxContainer.appendChild(addHideCheckbox("DH 21", "root_mashupcontainer-25_repeater-236-row-3"));
+checkboxContainer.appendChild(addHideCheckbox("DH 22", "root_mashupcontainer-25_repeater-236-row-4"));
+checkboxContainer.appendChild(addHideCheckbox("DH 23", "root_mashupcontainer-25_repeater-236-row-5"));
+checkboxContainer.appendChild(addHideCheckbox("DH 26", "root_mashupcontainer-25_repeater-236-row-6"));
+checkboxContainer.appendChild(addHideCheckbox("DH 30", "root_mashupcontainer-25_repeater-236-row-7"));
+checkboxContainer.appendChild(addHideCheckbox("DH 31", "root_mashupcontainer-25_repeater-236-row-8"));
+checkboxContainer.appendChild(addHideCheckbox("DH 32", "root_mashupcontainer-25_repeater-236-row-21"));
+checkboxContainer.appendChild(addHideCheckbox("DH 33", "root_mashupcontainer-25_repeater-236-row-10"));
+checkboxContainer.appendChild(addHideCheckbox("DH 34", "root_mashupcontainer-25_repeater-236-row-11"));
+checkboxContainer.appendChild(addHideCheckbox("DH 35", "root_mashupcontainer-25_repeater-236-row-22"));
+checkboxContainer.appendChild(addHideCheckbox("DH 36", "root_mashupcontainer-25_repeater-236-row-23"));
+checkboxContainer.appendChild(addHideCheckbox("DH 37", "root_mashupcontainer-25_repeater-236-row-24"));
+checkboxContainer.appendChild(addHideCheckbox("DH 38", "root_mashupcontainer-25_repeater-236-row-25"));
+checkboxContainer.appendChild(addHideCheckbox("DH 39", "root_mashupcontainer-25_repeater-236-row-26"));
+
+
+
+    // Добавляем кнопку "Включить/отключить все"
+    var toggleAllButton = document.createElement('button');
+    toggleAllButton.textContent = 'Switch';
+    toggleAllButton.style.background = '#D2FFFE';
+    toggleAllButton.style.color = '#000';
+    toggleAllButton.style.border = '2px solid #C6FCE6';
+    toggleAllButton.style.borderRadius = '5px';
+    toggleAllButton.style.padding = '5px 10px';
+    var allCheckboxes = checkboxContainer.querySelectorAll('input[type="checkbox"]');
+    toggleAllButton.addEventListener('click', function() {
+        var toggle = false;
+        for (var i = 0; i < allCheckboxes.length; i++) {
+            allCheckboxes[i].checked = !allCheckboxes[i].checked;
+            var elementId = allCheckboxes[i].getAttribute('data-element-id');
+            toggleElementVisibility(elementId, !allCheckboxes[i].checked);
+            allCheckboxes[i].dispatchEvent(new Event('change'));
+            if (allCheckboxes[i].checked) {
+                toggle = true;
+            }
+        }
+        toggleAllButton.textContent = toggle ? 'Switch' : 'Switch';
+    });
+
+    checkboxContainer.appendChild(toggleAllButton);
+
+    // Правый блок статистики
+    function StatisticBlock() {
+        setTimeout(function() {
+            const element = document.querySelector("#root_mashupcontainer-25_Container-93");
+            if (element) {
+                element.style.borderRadius = "20px";
+                element.style.opacity = "0.8"; // Прозрачность 50%
+            }
+        }, 1000); // Попробуйте увеличить задержку, если это не работает сразу
+    }
+
+    // Нижние описания цвета
+     function TooltipMenuDown() {
+         setTimeout(function() {
+                  const elementGreen = document.querySelector("#root_mashupcontainer-25_LabelResponsive-171");
+             if (elementGreen) {
+                 elementGreen.style.borderRadius = "6px";
+                 elementGreen.style.width = "98%";
+               }
+                  const elementRed = document.querySelector("#root_mashupcontainer-25_LabelResponsive-172");
+             if (elementRed) {
+                 elementRed.style.borderRadius = "6px";
+                 elementRed.style.width = "98%";
+            }
+                  const elementBlue = document.querySelector("#root_mashupcontainer-25_LabelResponsive-173");
+             if (elementBlue) {
+                 elementBlue.style.borderRadius = "6px";
+                 elementBlue.style.width = "98%";
+            }
+                  const elementYellow = document.querySelector("#root_mashupcontainer-25_LabelResponsive-174");
+             if (elementYellow) {
+                 elementYellow.style.borderRadius = "6px";
+                 elementYellow.style.width = "98%";
+            }
+             const ToolTipAll = document.querySelector("#root_mashupcontainer-25_Layout-6 > div > div.layout-vert-responsive-row.automatically-resize-contents.last-responsive-row");
+             if (ToolTipAll) {
+                 ToolTipAll.style.height = "6%";
+                 ToolTipAll.style.top = "94%";
+             }
+        }, 1000); // Попробуйте увеличить задержку, если это не работает сразу
+    }
+
+
+    // Выпадающее меню
+     function DropMenuBorder() {
+         setTimeout(function() {
+            const selectElement = document.querySelector("#root_ptcsdropdown-27").shadowRoot.querySelector("#select");
+            if (selectElement) {
+                selectElement.style.borderRadius = "20px";
+            }
+        }, 1000); // Попробуйте увеличить задержку, если это не работает сразу
+    }
+
+   // Функция, которую нужно выполнить после загрузки страницы
+    function applyStylesToElement(element) {
+        if (element) {
+            element.style.border = "1px solid";
+            element.style.borderRadius = "20px";
+        }
+    }
+
+    // Функция для наблюдения за изменениями в DOM
+    function observeDOM() {
+        const targetNode = document.body;
+
+        const observer = new MutationObserver(function(mutationsList) {
+            for (const mutation of mutationsList) {
+                if (mutation.type === 'childList') {
+                    // Сюда можно добавить проверку, чтобы определить, когда элемент появляется на странице
+                    const element = document.querySelector("#root_ptcsdropdown-27-external-wc");
+                    applyStylesToElement(element);
+                }
+            }
+        });
+
+        const config = { childList: true, subtree: true };
+        observer.observe(targetNode, config);
+    }
+
+    // Добавляем контейнер с чекбоксами и кнопкой на страницу
+    document.body.appendChild(checkboxContainer);
+
+     // Функция для выполнения других функций после загрузки страницы
+    function executeAfterPageLoad() {
+        DropMenuBorder();
+    }
+
+    // Ожидание события загрузки страницы
+    window.addEventListener('load', function() {
+        executeAfterPageLoad();
+        observeDOM();
+        StatisticBlock();
+        TooltipMenuDown();
+    });
+
+})();
