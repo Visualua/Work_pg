@@ -1,0 +1,94 @@
+// ==UserScript==
+// @name         e-CL Auto Select "OK"
+// @namespace    http://tampermonkey.net/
+// @version      0.1
+// @description  this is alpha
+// @author       You
+// @match        https://ldz-prof-rpt.na.pg.com/LineSpect_Data/Mobile/routemobile.aspx*
+// @grant        GM_addStyle
+// ==/UserScript==
+
+(function() {
+    'use strict';
+
+     // Вставляем CSS стили
+    GM_addStyle(`
+        /* Button style */
+.return-button {
+  width: 85px;
+  height: 38px;
+  border-radius: 6px;
+  border-color: #DEDEDE;
+  border-width: 1px;
+  background-color: #F9F9F9;
+  color: #000;
+  font-size: 14px;
+  font-weight: bold;
+  text-align: center;
+  cursor: pointer;
+
+  /* Shadow */
+  box-shadow: 0 3px 6px rgba(0, 255, 0, 0.1);
+}
+
+/* Hover state */
+.return-button:hover {
+  background-color: #e3e3e3;
+}
+
+/* Active state */
+.return-button:active {
+  background-color: #d4d4d4;
+}
+    `);
+
+    // Функция для изменения опций выпадающего списка
+    function changeDropdownOptions(select) {
+        var options = select.querySelectorAll('option');
+        options.forEach(function(option) {
+            if (option.value === 'OK') {
+                option.selected = true; // Выбираем опцию "OK"
+            }
+        });
+    }
+
+    // Проверяем, когда происходит второе перенаправление
+    var redirected = false;
+    var button = null; // Переменная для хранения кнопки
+
+    window.addEventListener('hashchange', function() {
+        if (window.location.hash === '#display' && redirected) {
+            // Создаем кнопку
+            button = document.createElement('button');
+            button.textContent = '✔️ All OK';
+            button.style.position = 'fixed';
+             button.style.top = '3px';
+            button.style.left = '90%';
+            button.style.zIndex = '9999';
+
+            // Применяем стили к кнопке
+            button.classList.add('return-button');
+
+
+            // Обработчик события для кнопки
+            button.addEventListener('click', function() {
+                // Найти все выпадающие списки на странице и изменить их опции
+                var selects = document.querySelectorAll('select[data-role="none"]');
+                selects.forEach(function(select) {
+                    changeDropdownOptions(select);
+                });
+            });
+
+            // Добавляем кнопку на страницу
+            document.body.appendChild(button);
+        } else if (window.location.hash === '#listRoutes') {
+            // Удаляем кнопку, если переходим на #listRoutes
+            if (button && button.parentNode) {
+                button.parentNode.removeChild(button);
+            }
+        }
+        redirected = true;
+    });
+})();
+
+
