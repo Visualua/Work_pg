@@ -42,14 +42,58 @@
 }
     `);
 
+function disableAutoLogoff() {
+  // Получить переменную logOffCounter
+  var logOffCounter = window.logOffCounter;
+
+  // Удалить таймер
+  if (logOffCounter) {
+    clearInterval(logOffCounter);
+  }
+
+  // Отключить автоматический выход из системы
+  window.autoLogoffStarted = false;
+
+  // Проверить, загружена ли страница
+  if (document.readyState === 'complete') {
+    // Отключить таймер
+    clearInterval(logOffCounter);
+    window.autoLogoffStarted = false;
+  }
+}
+
+    // Добавить функцию disableAutoLogoff
+  window.disableAutoLogoff = disableAutoLogoff;
+
+  // Добавить обработчик события DOMContentLoaded
+  document.addEventListener('DOMContentLoaded', function() {
+    // Вызвать функцию disableAutoLogoff
+    disableAutoLogoff();
+  });
+
     // Функция для изменения опций выпадающего списка
     function changeDropdownOptions(select) {
-        var options = select.querySelectorAll('option');
-        options.forEach(function(option) {
-            if (option.value === 'OK') {
-                option.selected = true; // Выбираем опцию "OK"
-            }
-        });
+       // Получить все элементы select на странице
+var selects = document.querySelectorAll('select');
+
+// Перебрать все элементы select
+for (var i = 0; i < selects.length; i++) {
+
+  // Нажать на выпадающий список
+  selects[i].click();
+
+  // Получить второй элемент в списке
+  var option = selects[i].options[2];
+
+  // Выбрать второй элемент
+  option.selected = true;
+
+  // Отпустить выпадающий список
+  selects[i].blur();
+
+  // Вызвать событие change
+  selects[i].dispatchEvent(new Event('change'));
+}
     }
 
     // Проверяем, когда происходит второе перенаправление
@@ -90,5 +134,4 @@
         redirected = true;
     });
 })();
-
 
