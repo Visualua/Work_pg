@@ -11,89 +11,80 @@
 (function() {
     'use strict';
 
-     // Вставляем CSS стили
+    // Вставляем CSS стили
     GM_addStyle(`
         /* Button style */
-.return-button {
-  width: 85px;
-  height: 38px;
-  border-radius: 6px;
-  border-color: #DEDEDE;
-  border-width: 1px;
-  background-color: #F9F9F9;
-  color: #000;
-  font-size: 14px;
-  font-weight: bold;
-  text-align: center;
-  cursor: pointer;
+        .return-button {
+          width: 85px;
+          height: 38px;
+          border-radius: 6px;
+          border-color: #DEDEDE;
+          border-width: 1px;
+          background-color: #F9F9F9;
+          color: #000;
+          font-size: 14px;
+          font-weight: bold;
+          text-align: center;
+          cursor: pointer;
 
-  /* Shadow */
-  box-shadow: 0 3px 6px rgba(0, 255, 0, 0.1);
-}
+          /* Shadow */
+          box-shadow: 0 3px 6px rgba(0, 255, 0, 0.1);
+        }
 
-/* Hover state */
-.return-button:hover {
-  background-color: #e3e3e3;
-}
+        /* Hover state */
+        .return-button:hover {
+          background-color: #e3e3e3;
+        }
 
-/* Active state */
-.return-button:active {
-  background-color: #d4d4d4;
-}
+        /* Active state */
+        .return-button:active {
+          background-color: #d4d4d4;
+        }
     `);
 
-function disableAutoLogoff() {
-  // Получить переменную logOffCounter
-  var logOffCounter = window.logOffCounter;
+    function disableAutoLogoff() {
+        // Получить переменную logOffCounter
+        var logOffCounter = window.logOffCounter;
 
-  // Удалить таймер
-  if (logOffCounter) {
-    clearInterval(logOffCounter);
-  }
+        // Удалить таймер
+        if (logOffCounter) {
+            clearInterval(logOffCounter);
+        }
 
-  // Отключить автоматический выход из системы
-  window.autoLogoffStarted = false;
+        // Отключить автоматический выход из системы
+        window.autoLogoffStarted = false;
 
-  // Проверить, загружена ли страница
-  if (document.readyState === 'complete') {
-    // Отключить таймер
-    clearInterval(logOffCounter);
-    window.autoLogoffStarted = false;
-  }
-}
+        // Проверить, загружена ли страница
+        if (document.readyState === 'complete') {
+            // Отключить таймер
+            clearInterval(logOffCounter);
+            window.autoLogoffStarted = false;
+        }
+    }
 
     // Добавить функцию disableAutoLogoff
-  window.disableAutoLogoff = disableAutoLogoff;
+    window.disableAutoLogoff = disableAutoLogoff;
 
-  // Добавить обработчик события DOMContentLoaded
-  document.addEventListener('DOMContentLoaded', function() {
-    // Вызвать функцию disableAutoLogoff
-    disableAutoLogoff();
-  });
+    // Добавить обработчик события DOMContentLoaded
+    document.addEventListener('DOMContentLoaded', function() {
+        // Вызвать функцию disableAutoLogoff
+        disableAutoLogoff();
+    });
 
     // Функция для изменения опций выпадающего списка
     function changeDropdownOptions(select) {
-       // Получить все элементы select на странице
-var selects = document.querySelectorAll('select');
+        // Получить третий элемент, а если его нет, то второй
+        var optionIndex = select.options.length >= 3 ? 2 : 1;
+        var option = select.options[optionIndex];
 
-// Перебрать все элементы select
-for (var i = 0; i < selects.length; i++) {
+        // Выбрать соответствующий элемент
+        option.selected = true;
 
-  // Нажать на выпадающий список
-  selects[i].click();
+        // Отпустить выпадающий список
+        select.blur();
 
-  // Получить второй элемент в списке
-  var option = selects[i].options[2];
-
-  // Выбрать второй элемент
-  option.selected = true;
-
-  // Отпустить выпадающий список
-  selects[i].blur();
-
-  // Вызвать событие change
-  selects[i].dispatchEvent(new Event('change'));
-}
+        // Вызвать событие change
+        select.dispatchEvent(new Event('change'));
     }
 
     // Проверяем, когда происходит второе перенаправление
@@ -106,13 +97,12 @@ for (var i = 0; i < selects.length; i++) {
             button = document.createElement('button');
             button.textContent = '✔️ All OK';
             button.style.position = 'fixed';
-             button.style.top = '3px';
+            button.style.top = '3px';
             button.style.left = '90%';
             button.style.zIndex = '9999';
 
             // Применяем стили к кнопке
             button.classList.add('return-button');
-
 
             // Обработчик события для кнопки
             button.addEventListener('click', function() {
@@ -134,4 +124,3 @@ for (var i = 0; i < selects.length; i++) {
         redirected = true;
     });
 })();
-
