@@ -72,13 +72,14 @@
     });
 
     // Функция для изменения опций выпадающего списка
-    function changeDropdownOptions(select) {
-        // Получить третий элемент, а если его нет, то второй
-        var optionIndex = select.options.length >= 3 ? 2 : 1;
-        var option = select.options[optionIndex];
-
-        // Выбрать соответствующий элемент
-        option.selected = true;
+   function changeDropdownOptions(select) {
+    // Ищем опцию "OK" и выбираем её
+    for (var i = 0; i < select.options.length; i++) {
+        if (select.options[i].text === "OK") {
+            select.options[i].selected = true;
+            break;
+        }
+    }
 
         // Отпустить выпадающий список
         select.blur();
@@ -98,7 +99,7 @@
             button.textContent = '✔️ All OK';
             button.style.position = 'fixed';
             button.style.top = '3px';
-            button.style.left = '90%';
+            button.style.left = '89%';
             button.style.zIndex = '9999';
 
             // Применяем стили к кнопке
