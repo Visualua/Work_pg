@@ -1,0 +1,64 @@
+// ==UserScript==
+// @name         Скрыть элемент по пути
+// @namespace    http://tampermonkey.net/
+// @version      0.1
+// @description  Скрывает элементы с указанными путями и применяет стили с отслеживанием изменений в DOM
+// @author       Вы
+// @match        *://*/*
+// @grant        none
+// ==/UserScript==
+
+(function() {
+    'use strict';
+
+    // Основной скрипт для скрытия элементов и добавления стилей
+    var elementsInfo = [
+        { path: "#root_pagemashupcontainer-6_container-493", styles: { display: 'none' } },
+        { path: "#root_pagemashupcontainer-6_container-554", styles: { display: 'none' } },
+        { path: "#root_pagemashupcontainer-6_container-24", styles: { display: 'none' } },
+        { path: "#root_pagemashupcontainer-6_container-25", styles: { display: 'none' } },
+
+        { path: "#root_pagemashupcontainer-6_mashupcontainer-450_container-59", styles: { display: 'none' } },
+        { path: "#root_pagemashupcontainer-6_mashupcontainer-450_container-60", styles: { display: 'none' } },
+
+        { path: "#root_pagemashupcontainer-6_container-494", styles: { left: '0px' } },
+
+        { path: "#root_pagemashupcontainer-6_container-22", styles: { width: '150%' } }, // CIL
+
+        { path: "#root_pagemashupcontainer-6_container-23", styles: { width: '39%', height: "19.6%", top: "70px", left: "37%", position: "fixed" } }, // DH
+    ];
+
+    function applyStyles(element, styles) {
+        if (element) {
+            Object.assign(element.style, styles);
+        }
+    }
+
+    function handleMutation(mutations) {
+        mutations.forEach(function(mutation) {
+            if (mutation.type === 'childList' && mutation.addedNodes.length > 0) {
+                elementsInfo.forEach(function(info) {
+                    var element = document.querySelector(info.path);
+                    applyStyles(element, info.styles);
+                });
+            }
+        });
+    }
+
+    var observer = new MutationObserver(handleMutation);
+    var observerConfig = { childList: true, subtree: true };
+
+    function onPageLoad() {
+        elementsInfo.forEach(function(info) {
+            var element = document.querySelector(info.path);
+            applyStyles(element, info.styles);
+        });
+        observer.observe(document.body, observerConfig);
+    }
+
+    if (document.readyState === 'complete' || document.readyState === 'interactive') {
+        onPageLoad();
+    } else {
+        document.addEventListener('DOMContentLoaded', onPageLoad);
+    }
+})();
