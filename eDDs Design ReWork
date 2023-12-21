@@ -48,7 +48,22 @@
         { path: "#root_pagemashupcontainer-6_mashupcontainer-449_elisaindicatorgroup-5 > div.elisa-widgets-scroll.widget-elisa-indicator-group-container > div > div.widget-elisa-indicator-group-indicator-content > div > div", styles: { borderRadius: "40px" } },
         { path: "#root_pagemashupcontainer-6_mashupcontainer-449_elisaindicatorgroup-16 > div.elisa-widgets-scroll.widget-elisa-indicator-group-container > div > div.widget-elisa-indicator-group-indicator-content > div > div", styles: { borderRadius: "40px" } },
         { path: "#root_pagemashupcontainer-6_mashupcontainer-449_elisaindicatorgroup-12 > div.elisa-widgets-scroll.widget-elisa-indicator-group-container > div > div.widget-elisa-indicator-group-indicator-content > div > div", styles: { borderRadius: "40px" } },
-       ];
+
+        // StartTime
+        { path: "#root_pagemashupcontainer-6_layout-10 > div > div:nth-child(2)", styles: { backgroundColor: "#B0FF81", opacity: "70%", borderRadius: "8px", top: "5%", left: "19%" } },
+        // EndTime
+        { path: "#root_pagemashupcontainer-6_layout-10 > div > div.layout-horiz-responsive-column.responsive.automatically-resize-contents.last-responsive-column", styles: { backgroundColor: "#FF8181", opacity: "70%", borderRadius: "8px", top: "5%", left: "60%" } },
+        // icon Warning_green
+        { path: "#root_pagemashupcontainer-6_valuedisplay-134", styles: { display: 'none' } },
+        // value LineName
+        { path: "#root_pagemashupcontainer-6_layout-6 > div > div.layout-horiz-responsive-column.responsive.automatically-resize-contents.first-responsive-column", styles: { backgroundColor: "#83A8FF", opacity: "70%", borderRadius: "8px", top: "5%", width: "12%", left: "4%" } },
+        // value Teams #
+        { path: "#root_pagemashupcontainer-6_layout-6 > div > div:nth-child(2)", styles: { backgroundColor: "#FFCE83", opacity: "70%", borderRadius: "8px", top: "5%", width: "10%", left: "17%" } },
+        // icon Right_top_Menu
+        { path: "#root_container-142 > div.expand-toggle.expanded", styles: { display: 'none' } },
+        // menu ShiftMenu
+        { path: "#root_pagemashupcontainer-6_layout-10 > div > div.layout-horiz-responsive-column.responsive.automatically-resize-contents.first-responsive-column", styles: { position: "fixed", left: "33%", backgroundColor: "white", opacity: "70%", borderRadius: "8px", width: "11%", height: "46px", top: "3px" } },
+    ];
 
     function applyStyles(element, styles) {
         if (element) {
