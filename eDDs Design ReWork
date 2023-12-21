@@ -1,10 +1,10 @@
 // ==UserScript==
-// @name         Скрыть элемент по пути
+// @name         eDDS Design ReWork
 // @namespace    http://tampermonkey.net/
-// @version      0.1
-// @description  Скрывает элементы с указанными путями и применяет стили с отслеживанием изменений в DOM
-// @author       Вы
-// @match        *://*/*
+// @version      1
+// @description  Убираем лишнее в дизайне и округляем элементы
+// @author       V
+// @match        https://ldz-prof-rpt.na.pg.com:88/Thingworx/Runtime/index.html*
 // @grant        none
 // ==/UserScript==
 
@@ -26,7 +26,29 @@
         { path: "#root_pagemashupcontainer-6_container-22", styles: { width: '150%' } }, // CIL
 
         { path: "#root_pagemashupcontainer-6_container-23", styles: { width: '39%', height: "19.6%", top: "70px", left: "37%", position: "fixed" } }, // DH
-    ];
+
+        // For DH
+        { path: "#root_pagemashupcontainer-6_mashupcontainer-439_elisaindicatorgroup-11 > div.elisa-widgets-scroll.widget-elisa-indicator-group-container > div > div.widget-elisa-indicator-group-indicator-content > div > div", styles: { borderRadius: "40px" } },
+        { path: "#root_pagemashupcontainer-6_mashupcontainer-439_elisaindicatorgroup-8 > div.elisa-widgets-scroll.widget-elisa-indicator-group-container > div > div.widget-elisa-indicator-group-indicator-content > div > div", styles: { borderRadius: "40px" } },
+        { path: "#root_pagemashupcontainer-6_mashupcontainer-439_elisaindicatorgroup-9 > div.elisa-widgets-scroll.widget-elisa-indicator-group-container > div > div.widget-elisa-indicator-group-indicator-content > div > div", styles: { borderRadius: "40px" } },
+        { path: "#root_pagemashupcontainer-6_mashupcontainer-439_elisaindicatorgroup-12 > div.elisa-widgets-scroll.widget-elisa-indicator-group-container > div > div.widget-elisa-indicator-group-indicator-content > div > div", styles: { borderRadius: "40px" } },
+
+        // For IE
+        { path: "#root_pagemashupcontainer-6_mashupcontainer-499_elisaindicatorgroup-41 > div.elisa-widgets-scroll.widget-elisa-indicator-group-container > div > div.widget-elisa-indicator-group-indicator-content > div > div", styles: { borderRadius: "40px" } },
+        { path: "#root_pagemashupcontainer-6_mashupcontainer-499_elisaindicatorgroup-47 > div.elisa-widgets-scroll.widget-elisa-indicator-group-container > div > div.widget-elisa-indicator-group-indicator-content > div > div", styles: { borderRadius: "40px" } },
+        { path: "#root_pagemashupcontainer-6_mashupcontainer-499_elisaindicatorgroup-11 > div.elisa-widgets-scroll.widget-elisa-indicator-group-container > div > div.widget-elisa-indicator-group-indicator-content > div > div", styles: { borderRadius: "40px" } },
+        { path: "#root_pagemashupcontainer-6_mashupcontainer-499_elisaindicatorgroup-13 > div.elisa-widgets-scroll.widget-elisa-indicator-group-container > div > div.widget-elisa-indicator-group-indicator-content > div > div", styles: { borderRadius: "40px" } },
+        { path: "#root_pagemashupcontainer-6_mashupcontainer-499_elisaindicatorgroup-12 > div.elisa-widgets-scroll.widget-elisa-indicator-group-container > div > div.widget-elisa-indicator-group-indicator-content > div > div", styles: { borderRadius: "40px" } },
+
+        // For CL
+        { path: "#root_pagemashupcontainer-6_mashupcontainer-521_elisaindicatorgroup-14 > div.elisa-widgets-scroll.widget-elisa-indicator-group-container > div > div.widget-elisa-indicator-group-indicator-content > div > div", styles: { borderRadius: "40px" } },
+        { path: "#root_pagemashupcontainer-6_mashupcontainer-521_elisaindicatorgroup-15 > div.elisa-widgets-scroll.widget-elisa-indicator-group-container > div > div.widget-elisa-indicator-group-indicator-content > div > div", styles: { borderRadius: "40px" } },
+
+         // For CIL
+        { path: "#root_pagemashupcontainer-6_mashupcontainer-449_elisaindicatorgroup-5 > div.elisa-widgets-scroll.widget-elisa-indicator-group-container > div > div.widget-elisa-indicator-group-indicator-content > div > div", styles: { borderRadius: "40px" } },
+        { path: "#root_pagemashupcontainer-6_mashupcontainer-449_elisaindicatorgroup-16 > div.elisa-widgets-scroll.widget-elisa-indicator-group-container > div > div.widget-elisa-indicator-group-indicator-content > div > div", styles: { borderRadius: "40px" } },
+        { path: "#root_pagemashupcontainer-6_mashupcontainer-449_elisaindicatorgroup-12 > div.elisa-widgets-scroll.widget-elisa-indicator-group-container > div > div.widget-elisa-indicator-group-indicator-content > div > div", styles: { borderRadius: "40px" } },
+       ];
 
     function applyStyles(element, styles) {
         if (element) {
