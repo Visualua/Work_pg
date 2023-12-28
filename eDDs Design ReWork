@@ -63,6 +63,9 @@
         { path: "#root_container-142 > div.expand-toggle.expanded", styles: { display: 'none' } },
         // menu ShiftMenu
         { path: "#root_pagemashupcontainer-6_layout-10 > div > div.layout-horiz-responsive-column.responsive.automatically-resize-contents.first-responsive-column", styles: { position: "fixed", left: "33%", backgroundColor: "white", opacity: "70%", borderRadius: "8px", width: "11%", height: "46px", top: "3px" } },
+        // menu ShiftMenu_Coordinate
+        { path: "#root_pagemashupcontainer-6_layout-365 > div > div", styles: { top: "-8%", left: "7%" } },
+
     ];
 
     function applyStyles(element, styles) {
