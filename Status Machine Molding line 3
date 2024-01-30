@@ -273,14 +273,14 @@ checkboxContainer.style.borderRadius = '10px';
 checkboxContainer.appendChild(addHideCheckbox("DA 01", "root_mashupcontainer-25_repeater-236-row-38"));
 checkboxContainer.appendChild(addHideCheckbox("DA 03", "root_mashupcontainer-25_repeater-236-row-39"));
 checkboxContainer.appendChild(addHideCheckbox("DA 05", "root_mashupcontainer-25_repeater-236-row-36"));
-checkboxContainer.appendChild(addHideCheckbox("DA 06", "root_mashupcontainer-25_repeater-236-row-43"));
+checkboxContainer.appendChild(addHideCheckbox("DA 06", "root_mashupcontainer-25_repeater-236-row-44"));
 checkboxContainer.appendChild(addHideCheckbox("DA 09", "root_mashupcontainer-25_repeater-236-row-33"));
 checkboxContainer.appendChild(addHideCheckbox("DA 10", "root_mashupcontainer-25_repeater-236-row-34"));
-checkboxContainer.appendChild(addHideCheckbox("DD 01", "root_mashupcontainer-25_repeater-236-row-45"));
+checkboxContainer.appendChild(addHideCheckbox("DD 01", "root_mashupcontainer-25_repeater-236-row-46"));
 checkboxContainer.appendChild(addHideCheckbox("DH 06", "root_mashupcontainer-25_repeater-236-row-20"));
 checkboxContainer.appendChild(addHideCheckbox("DH 09", "root_mashupcontainer-25_repeater-236-row-13"));
 checkboxContainer.appendChild(addHideCheckbox("DH 10", "root_mashupcontainer-25_repeater-236-row-22"));
-checkboxContainer.appendChild(addHideCheckbox("DH 11", "root_mashupcontainer-25_repeater-236-row-44"));
+checkboxContainer.appendChild(addHideCheckbox("DH 11", "root_mashupcontainer-25_repeater-236-row-45"));
 checkboxContainer.appendChild(addHideCheckbox("DH 13", "root_mashupcontainer-25_repeater-236-row-24"));
 checkboxContainer.appendChild(addHideCheckbox("DH 14", "root_mashupcontainer-25_repeater-236-row-30"));
 checkboxContainer.appendChild(addHideCheckbox("DH 15", "root_mashupcontainer-25_repeater-236-row-23"));
@@ -313,8 +313,9 @@ checkboxContainer.appendChild(addHideCheckbox("DP 05", "root_mashupcontainer-25_
 checkboxContainer.appendChild(addHideCheckbox("DP 08", "root_mashupcontainer-25_repeater-236-row-37"));
 checkboxContainer.appendChild(addHideCheckbox("DP 10", "root_mashupcontainer-25_repeater-236-row-35"));
 checkboxContainer.appendChild(addHideCheckbox("DP 11", "root_mashupcontainer-25_repeater-236-row-40"));
-checkboxContainer.appendChild(addHideCheckbox("DP 12", "root_mashupcontainer-25_repeater-236-row-41"));
-checkboxContainer.appendChild(addHideCheckbox("DP 13", "root_mashupcontainer-25_repeater-236-row-42"));
+checkboxContainer.appendChild(addHideCheckbox("DP 12", "root_mashupcontainer-25_repeater-236-row-42"));
+checkboxContainer.appendChild(addHideCheckbox("DP 13", "root_mashupcontainer-25_repeater-236-row-43"));
+checkboxContainer.appendChild(addHideCheckbox("DP 14", "root_mashupcontainer-25_repeater-236-row-41"));
 
 
 
@@ -483,9 +484,11 @@ checkboxContainer.appendChild(addHideCheckbox("DP 08", "root_mashupcontainer-25_
 checkboxContainer.appendChild(addHideCheckbox("DA 01", "root_mashupcontainer-25_repeater-236-row-38"));
 checkboxContainer.appendChild(addHideCheckbox("DA 03", "root_mashupcontainer-25_repeater-236-row-39"));
 checkboxContainer.appendChild(addHideCheckbox("DP 11", "root_mashupcontainer-25_repeater-236-row-40"));
-checkboxContainer.appendChild(addHideCheckbox("DP 12", "root_mashupcontainer-25_repeater-236-row-41"));
-checkboxContainer.appendChild(addHideCheckbox("DP 13", "root_mashupcontainer-25_repeater-236-row-42"));
-checkboxContainer.appendChild(addHideCheckbox("DA 06", "root_mashupcontainer-25_repeater-236-row-43"));
-checkboxContainer.appendChild(addHideCheckbox("DH 11", "root_mashupcontainer-25_repeater-236-row-44"));
+checkboxContainer.appendChild(addHideCheckbox("DP 14", "root_mashupcontainer-25_repeater-236-row-41"));
+checkboxContainer.appendChild(addHideCheckbox("DP 12", "root_mashupcontainer-25_repeater-236-row-42"));
+checkboxContainer.appendChild(addHideCheckbox("DP 13", "root_mashupcontainer-25_repeater-236-row-43"));
+checkboxContainer.appendChild(addHideCheckbox("DA 06", "root_mashupcontainer-25_repeater-236-row-44"));
+checkboxContainer.appendChild(addHideCheckbox("DH 11", "root_mashupcontainer-25_repeater-236-row-45"));
+checkboxContainer.appendChild(addHideCheckbox("DD 01", "root_mashupcontainer-25_repeater-236-row-46"));
 checkboxContainer.appendChild(addHideCheckbox("DD 01", "root_mashupcontainer-25_repeater-236-row-45"));
 */
