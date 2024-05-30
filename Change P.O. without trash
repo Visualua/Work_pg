@@ -4,92 +4,32 @@
 // @version      0.1
 // @description  try to take over the world!
 // @author       You
-// @match        https://ldz-mesappbr3.na.pg.com:4500/PEWebApp.html*
-// @icon         https://www.google.com/s2/favicons?sz=64&domain=pg.com
-// @grant        none
+// @match        https://ldz-mesappbr.na.pg.com:4600/*
+// @grant        GM_addStyle
 // ==/UserScript==
 
 (function() {
     'use strict';
-  // Функция для удаления блока
 
     // Функция для изменения стиля ширины
     function setWidth() {
-        var widthElement = document.querySelector("#MainDiv > div.bottom-taskbar.ng-scope > div.bottom-taskbar-inner > div > div:nth-child(1)");
+        var widthElement = document.querySelector("body > app-root > ion-app > ion-router-outlet > app-home > ion-tabs > div > ion-router-outlet > app-mainscreen > ion-content > div > ion-grid")
         if (widthElement) {
-            widthElement.style.width = '15px';
-        }
-        var targetElement = document.querySelector("#MainDiv > div.bottom-taskbar.ng-scope > div.bottom-taskbar-inner > div > div:nth-child(1)");
-        if (targetElement) {
-            targetElement.style.marginLeft = '6%';
-            targetElement.style.flexDirection = 'unset';
-        }
-         var targetElement6 = document.querySelector("#MainDiv > div.bottom-taskbar.ng-scope > div.bottom-taskbar-inner > div > div:nth-child(6)");
-        if (targetElement6) {
-            targetElement6.style.marginLeft = '-25%';
-            targetElement6.style.flexDirection = 'unset';
-        }
-         var targetElementLong = document.querySelector("#MainDiv > div.bottom-taskbar.ng-scope > div.bottom-taskbar-inner-background");
-        if (targetElementLong) {
-            targetElementLong.style.width = '165px';
+            widthElement.style.width = '45%';
+            console.log("Element found and width set to 100px");
+        } else {
+            console.log("Element not found");
         }
     }
 
-    function removeBlock() {
-        var block = document.querySelector("#MainMenuPage > div.ui-content.page-content > div > div.ui-grid-b > div:nth-child(4)");
-        if (block) {
-            block.remove();
-        }
-    }
-
-     function setMinHeight() {
-        var targetBlock = document.querySelector("#MainMenuPage > div.ui-content.page-content > div");
-        if (targetBlock) {
-            targetBlock.style.minHeight = "250px";
-        }
-    }
-
-      // Функция для скрытия элемента
-    function hideElement() {
-        var element2 = document.querySelector("#MainDiv > div.bottom-taskbar.ng-scope > div.bottom-taskbar-inner > div > div:nth-child(2) > div.bottom-taskbar-button-wrapper-3");
-        if (element2) {
-            element2.style.display = 'none';
-        }
-        var element3 = document.querySelector("#MainDiv > div.bottom-taskbar.ng-scope > div.bottom-taskbar-inner > div > div:nth-child(3) > div.bottom-taskbar-button-wrapper-3");
-        if (element3) {
-            element3.style.display = 'none';
-        }
-
-        var element4 = document.querySelector("#MainDiv > div.bottom-taskbar.ng-scope > div.bottom-taskbar-inner > div > div:nth-child(4) > div.bottom-taskbar-button-wrapper-3");
-        if (element4) {
-            element4.style.display = 'none';
-        }
-        var element5 = document.querySelector("#MainDiv > div.bottom-taskbar.ng-scope > div.bottom-taskbar-inner > div > div:nth-child(5) > div.bottom-taskbar-button-wrapper-3");
-        if (element5) {
-            element5.style.display = 'none';
-        }
-        var element7 = document.querySelector("#MainDiv > div.bottom-taskbar.ng-scope > div.bottom-taskbar-inner > div > div:nth-child(7) > div.bottom-taskbar-button-wrapper-3");
-        if (element7) {
-            element7.style.display = 'none';
-        }
-    }
-
-
-
-    // Запускаем функции при загрузке страницы
-    removeBlock();
-    hideElement();
+    // Запускаем функцию при загрузке страницы
     setWidth();
-
 
     // Наблюдатель за изменениями в DOM
     var observer = new MutationObserver(function(mutations) {
         mutations.forEach(function(mutation) {
             // Проверяем, появился ли блок после изменения
             if (mutation.addedNodes.length > 0) {
-                removeBlock();
-                setMinHeight();
-                hideElement();
                 setWidth();
             }
         });
@@ -97,5 +37,5 @@
 
     // Начинаем наблюдение за изменениями в DOM
     observer.observe(document.body, { childList: true, subtree: true });
- 
+
 })();
