@@ -4,7 +4,7 @@
 // @version      1
 // @description  Убираем лишнее в дизайне и округляем элементы
 // @author       V
-// @match        https://ldz-prof-rpt.na.pg.com:88/Thingworx/Runtime/index.html*
+// @match        https://ldz-prof-pdp.na.pg.com:88/Thingworx/Runtime/index.html*
 // @grant        none
 // ==/UserScript==
 
@@ -21,11 +21,16 @@
         { path: "#root_pagemashupcontainer-6_mashupcontainer-450_container-59", styles: { display: 'none' } },
         { path: "#root_pagemashupcontainer-6_mashupcontainer-450_container-60", styles: { display: 'none' } },
 
-        { path: "#root_pagemashupcontainer-6_container-494", styles: { left: '0px' } },
 
-        { path: "#root_pagemashupcontainer-6_container-22", styles: { width: '150%' } }, // CIL
+        { path: "#root_pagemashupcontainer-6_layout-2 > div.layout-vert-fluid-center > div.layout-vert-responsive-row.automatically-resize-contents.last-responsive-row", styles: { display: 'none' } },
 
-        { path: "#root_pagemashupcontainer-6_container-23", styles: { width: '39%', height: "19.6%", top: "70px", left: "37%", position: "fixed" } }, // DH
+        { path: "#root_pagemashupcontainer-6_container-494", styles: { width: '39%', height: "18%", top: "30%", left: "50%", position: "fixed" } }, // CL
+
+        { path: "#root_pagemashupcontainer-6_container-22", styles: { width: '39%', height: "18%", top: "30%", left: "7%", position: "fixed" } }, // CIL
+
+        { path: "#root_pagemashupcontainer-6_container-23", styles: { width: '39%', height: "18%", top: "70px", left: "50%", position: "fixed" } }, // IE
+
+        { path: "#root_pagemashupcontainer-6_container-492", styles: { width: '39%', height: "18%", top: "70px", left: "7%", position: "fixed" } }, // DH
 
         // For DH
         { path: "#root_pagemashupcontainer-6_mashupcontainer-439_elisaindicatorgroup-11 > div.elisa-widgets-scroll.widget-elisa-indicator-group-container > div > div.widget-elisa-indicator-group-indicator-content > div > div", styles: { borderRadius: "40px" } },
